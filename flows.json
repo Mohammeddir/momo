@@ -179,8 +179,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 240,
-        "y": 420,
+        "x": 260,
+        "y": 400,
         "wires": [
             [
                 "bf539fd7cba25cda"
