@@ -100,8 +100,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 490,
-        "y": 200,
+        "x": 1030,
+        "y": 660,
         "wires": []
     },
     {
@@ -120,9 +120,7 @@
         "x": 190,
         "y": 200,
         "wires": [
-            [
-                "6e584a7cbf8c2bd9"
-            ]
+            []
         ]
     },
     {
@@ -142,5 +140,86 @@
         "x": 510,
         "y": 100,
         "wires": []
+    },
+    {
+        "id": "4eadeebb85d6750f",
+        "type": "elasticsearch-index",
+        "z": "3520d9db361a9cb8",
+        "name": "",
+        "index": "",
+        "esType": "",
+        "esId": "",
+        "routing": "",
+        "x": 830,
+        "y": 560,
+        "wires": [
+            [
+                "6e584a7cbf8c2bd9"
+            ]
+        ]
+    },
+    {
+        "id": "6c4c0275a59dd419",
+        "type": "inject",
+        "z": "3520d9db361a9cb8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 420,
+        "wires": [
+            [
+                "bf539fd7cba25cda"
+            ]
+        ]
+    },
+    {
+        "id": "bf539fd7cba25cda",
+        "type": "function",
+        "z": "3520d9db361a9cb8",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 480,
+        "wires": [
+            [
+                "31c3b43892b0de84"
+            ]
+        ]
+    },
+    {
+        "id": "31c3b43892b0de84",
+        "type": "json",
+        "z": "3520d9db361a9cb8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 630,
+        "y": 540,
+        "wires": [
+            [
+                "4eadeebb85d6750f"
+            ]
+        ]
     }
 ]
