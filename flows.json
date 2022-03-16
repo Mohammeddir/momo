@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "669d2df7e1499c5f",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "3e557388efe56099",
         "type": "mqtt-broker",
         "name": "",
@@ -37,7 +45,7 @@
         "id": "c21618fe6437a917",
         "type": "mqtt-broker",
         "name": "",
-        "broker": "192.168.88.85",
+        "broker": "localhost",
         "port": "1883",
         "clientid": "",
         "autoConnect": true,
@@ -62,39 +70,10 @@
     {
         "id": "d4eae1e68c3eb8be",
         "type": "elasticsearch-config",
-        "name": "elasticsearch",
+        "name": "pw-virtual-machine",
         "server": "http://192.168.88.157:9200/",
         "timeout": "",
         "apiVersion": "_default"
-    },
-    {
-        "id": "6abde302e801c9b9",
-        "type": "inject",
-        "z": "3520d9db361a9cb8",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "ciao bell",
-        "payloadType": "str",
-        "x": 210,
-        "y": 100,
-        "wires": [
-            [
-                "670eda5669c460f0"
-            ]
-        ]
     },
     {
         "id": "6e584a7cbf8c2bd9",
@@ -108,8 +87,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1030,
-        "y": 660,
+        "x": 1010,
+        "y": 420,
         "wires": []
     },
     {
@@ -117,7 +96,7 @@
         "type": "mqtt in",
         "z": "3520d9db361a9cb8",
         "name": "",
-        "topic": "sys",
+        "topic": "Position",
         "qos": "2",
         "datatype": "auto",
         "broker": "3e557388efe56099",
@@ -125,29 +104,13 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 190,
-        "y": 200,
+        "x": 150,
+        "y": 140,
         "wires": [
-            []
+            [
+                "41eeabda0cbd3159"
+            ]
         ]
-    },
-    {
-        "id": "670eda5669c460f0",
-        "type": "mqtt out",
-        "z": "3520d9db361a9cb8",
-        "name": "",
-        "topic": "sys",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "3e557388efe56099",
-        "x": 510,
-        "y": 100,
-        "wires": []
     },
     {
         "id": "4eadeebb85d6750f",
@@ -155,12 +118,12 @@
         "z": "3520d9db361a9cb8",
         "name": "",
         "server": "d4eae1e68c3eb8be",
-        "index": "index_anagrafica",
+        "index": "index_momo",
         "esType": "_doc",
         "esId": "",
         "routing": "",
-        "x": 850,
-        "y": 500,
+        "x": 790,
+        "y": 320,
         "wires": [
             [
                 "6e584a7cbf8c2bd9"
@@ -175,10 +138,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -186,10 +145,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 260,
-        "y": 400,
+        "payload": "400",
+        "payloadType": "num",
+        "x": 110,
+        "y": 320,
         "wires": [
             [
                 "41eeabda0cbd3159"
@@ -205,7 +164,7 @@
         "action": "",
         "pretty": false,
         "x": 610,
-        "y": 460,
+        "y": 320,
         "wires": [
             [
                 "4eadeebb85d6750f"
@@ -217,17 +176,102 @@
         "type": "function",
         "z": "3520d9db361a9cb8",
         "name": "",
-        "func": "msg.payload = {\n    \"age\" : 45,\n    \"created\" : msg.payload,\n    \"name\" : \"momo\",\n    \"salary\" : 56.80\n    \n}\nreturn msg;",
+        "func": "msg.payload = {\n\n    \"Postition\" : msg.payload\n    \n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 480,
-        "y": 400,
+        "x": 400,
+        "y": 320,
         "wires": [
             [
                 "31c3b43892b0de84"
+            ]
+        ]
+    },
+    {
+        "id": "d3ea455bb97586ee",
+        "type": "mqtt in",
+        "z": "669d2df7e1499c5f",
+        "name": "",
+        "topic": "position",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "c21618fe6437a917",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 570,
+        "y": 320,
+        "wires": [
+            [
+                "5bc811ae0914c1cd"
+            ]
+        ]
+    },
+    {
+        "id": "5bc811ae0914c1cd",
+        "type": "debug",
+        "z": "669d2df7e1499c5f",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e20ddf745beda391",
+        "type": "mqtt out",
+        "z": "669d2df7e1499c5f",
+        "name": "",
+        "topic": "position ",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c21618fe6437a917",
+        "x": 420,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "1a3a499fd9295f64",
+        "type": "inject",
+        "z": "669d2df7e1499c5f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "ciaooooooooooo",
+        "payloadType": "str",
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "e20ddf745beda391"
             ]
         ]
     }
